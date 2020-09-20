@@ -10,14 +10,14 @@ const COLUMN_WIDTH = 40;
 const COLUMN_HEIGHT = 150;
 const COLUMN_SPACING = 50;
 
-let texts = ['Ура вы победили!', 'Список результатов:'];
+const texts = ['Ура вы победили!', 'Список результатов:'];
 
-let renderCloud = function (ctx, x, y, color) {
+const renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-let maxValue = function (values) {
+const maxValue = function (values) {
   let maxCurrentValue = values[0];
   for (let i = 1; i < values.length; i++) {
     if (values[i] > maxCurrentValue) {
@@ -27,7 +27,7 @@ let maxValue = function (values) {
   return maxCurrentValue;
 };
 
-let outLineByLine = function (ctx, lines, x, y, lineSpacing) {
+const outLineByLine = function (ctx, lines, x, y, lineSpacing) {
   for (let i = 0; i < lines.length; i++) {
     ctx.fillText(lines[i], x, y);
     y += lineSpacing;
