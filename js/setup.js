@@ -32,6 +32,9 @@ const renderWizard = function (wizard) {
   return wizardElement;
 };
 
+// Ищем окно setup
+const setup = document.querySelector('.setup');
+
 // Создаем волшебников
 const listWizards = createWizards(COUNT_WIZARDS);
 
@@ -44,10 +47,6 @@ for (let i = 0; i < listWizards.length; i++) {
   fragment.appendChild(renderWizard(listWizards[i]));
 }
 
-// Ищем окно и отображем его(убираем класс hidden)
-const setup = document.querySelector('.setup');
-setup.classList.remove('hidden');
-
 // Ищем блок, в котором будем отображать волшебников
 const similarListElement = setup.querySelector('.setup-similar-list');
 
@@ -56,3 +55,44 @@ similarListElement.appendChild(fragment);
 
 // Показываем новых волшебников
 document.querySelector('.setup-similar').classList.remove('hidden');
+
+
+// Отображем setup (убираем класс hidden)
+
+const setupOpen = document.querySelector('.setup-open');
+setupOpen.addEventListener('click', function () {
+  setup.classList.remove('hidden');
+});
+
+// Когда в фокусе кнопка setup-open, то по нажатию Enter запускать окно настроек
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    setup.classList.remove('hidden');
+  }
+});
+
+// Пишем обработчик закрытия окна настроек по клику мыши
+const setupClose = setup.querySelector('.setup-close');
+setupClose.addEventListener('click', function () {
+  setup.classList.add('hidden');
+});
+
+// Обработчик закрытия окна настроек на кнопку ESC, если фокус находится в строке ввода, то не закрывать окно
+document.addEventListener('keydown', function (evt) {
+  if ((!document.activeElement.matches('.setup-user-name')) && (evt.key === 'Escape')) {
+    setup.classList.add('hidden');
+  }
+});
+
+// Если окно открыто и фокус находится на кнопке закрытия окна
+// 1. Проверить наличие фокуса на кнопке закрытия
+// 2. Проверить наличие класса hidden в элементе окна настроек, если нет, то открыто окно
+// 3. Если оба условия предыдущих совпадают и нажата клавиша Enter, то закрыть окно.
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (!setup.classList.contains('hidden')) {
+    if (evt.key === 'Enter') {
+      setup.classList.add('hidden');
+    }
+  }
+});

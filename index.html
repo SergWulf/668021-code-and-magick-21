@@ -62,13 +62,15 @@
   <div class="demo"></div>
 
   <div class="setup-open">
-    <img src="img/user-1.jpg" class="setup-open-icon">
+    <img tabindex="0" src="img/user-1.jpg" class="setup-open-icon">
   </div>
 </header>
 
 <div class="overlay setup hidden">
   <form class="setup-wizard-form"
+        name="setupWizardForm"
         method="post"
+        action="https://javascript.pages.academy/code-and-magick"
         enctype="multipart/form-data"
         autocomplete="off">
 
@@ -85,7 +87,7 @@
         </label>
       </div>
 
-      <span class="setup-close">&times;</span>
+      <span tabindex="0" class="setup-close">&times;</span>
     </div>
 
 
